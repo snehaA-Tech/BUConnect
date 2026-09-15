@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+html.dark {
+  color-scheme: dark;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  @apply bg-paper text-ink dark:bg-ink dark:text-paper transition-colors duration-200;
+}
+
+::selection {
+  @apply bg-cobalt-400/30;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { @apply bg-ink/10 dark:bg-paper/10 rounded-full; }
+
+/* Focus visibility */
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid #2D5BFF;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+.card {
+  @apply bg-white dark:bg-ink-soft rounded-xl2 shadow-card border border-ink/5 dark:border-white/5;
+}
+
+.tick-rule {
+  background-image: repeating-linear-gradient(
+    to right,
+    currentColor 0,
+    currentColor 1px,
+    transparent 1px,
+    transparent 8px
+  );
+  height: 1px;
+  opacity: 0.15;
+}
