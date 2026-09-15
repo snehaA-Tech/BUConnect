@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>पंचमुखी · FiveFold — Banasthali Unified Activity & Senior Guide Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Noto+Serif+Devanagari:wght@500;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ivory: #FBF5E9;
+    --paper: #F4EBD8;
+    --paper-card: #FAF2E3;
+    --maroon: #7A1F3D;
+    --maroon-deep: #5A1530;
+    --gold: #C1902E;
+    --gold-soft: #E5C378;
+    --teal: #1F6F5C;
+    --teal-dark: #154D40;
+    --ink: #2B1B1F;
+    --ink-soft: #5B4A4E;
+    --line: #DECEB0;
+    --white: #FFFFFF;
+    --shadow: 0 10px 30px -5px rgba(43,27,31,0.08);
+    --shadow-hover: 0 15px 35px -5px rgba(122,31,61,0.15);
+  }
+  
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--ivory);
+    background-image:
+      radial-gradient(circle at 15% 8%, rgba(122,31,61,0.05), transparent 40%),
+      radial-gradient(circle at 85% 30%, rgba(193,144,46,0.07), transparent 45%);
+    color: var(--ink);
+    font-family: 'Source Sans 3', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  h1, h2, h3, .display { font-family: 'Fraunces', serif; }
+  .hindi { font-family: 'Noto Serif Devanagari', serif; }
+
+  /* Top Ribbon */
+  .ribbon {
+    background: var(--maroon);
+    color: var(--ivory);
+    text-align: center;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    padding: 9px 14px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .ribbon-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; }
+
+  /* Navigation Bar */
+  header.hero {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 40px 24px 30px;
+    text-align: center;
+    position: relative;
+  }
+  .fold-mark {
+    display: flex;
+    justify-content: center;
+    gap: 9px;
+    margin-bottom: 20px;
+  }
+  .fold-mark span {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.55;
+  }
+  .fold-mark span:nth-child(3) { opacity: 1; width: 11px; height: 11px; background: var(--maroon); }
+  
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.76rem;
+    color: var(--teal);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  h1.title {
+    font-size: 2.3rem;
+    line-height: 1.15;
+    margin: 0 0 8px;
+    color: var(--maroon-deep);
+  }
+  .title .hindi { font-size: 2.6rem; display: block; font-weight: 700; color: var(--gold); margin-bottom: 2px; }
+  .subtitle {
+    max-width: 650px;
+    margin: 12px auto 0;
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  .hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 26px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1.5px solid transparent;
+    transition: all 0.2s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary { background: var(--maroon); color: var(--ivory); box-shadow: 0 4px 14px rgba(122,31,61,0.25); }
+  .btn-primary:hover { background: var(--maroon-deep); box-shadow: 0 6px 18px rgba(122,31,61,0.35); }
+  .btn-teal { background: var(--teal); color: var(--ivory); box-shadow: 0 4px 14px rgba(31,111,92,0.25); }
+  .btn-teal:hover { background: var(--teal-dark); }
+  .btn-ghost { background: transparent; border-color: var(--ink); color: var(--ink); }
+  .btn-ghost:hover { background: var(--ink); color: var(--ivory); }
+
+  /* Quick Metrics Bar */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    max-width: 1080px;
+    margin: 20px auto 40px;
+    padding: 0 24px;
+  }
+  .metric-card {
+    background: var(--paper-card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+  }
+  .metric-val { font-family: 'Fraunces', serif; font-size: 1.8rem; font-weight: 700; color: var(--maroon); }
+  .metric-label { font-size: 0.8rem; text-transform: uppercase; color: var(--ink-soft); font-weight: 600; letter-spacing: 0.05em; }
+
+  /* Search & Navigation Bar */
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  nav.pills {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(251,245,233,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    padding: 12px 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  }
+  .pills-inner {
+    max-width: 1080px; margin: 0 auto;
+    display: flex; gap: 10px; align-items: center; overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .pills-inner::-webkit-scrollbar { display: none; }
+  .pill {
+    white-space: nowrap;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1.3px solid var(--line);
+    color: var(--ink);
+    background: var(--ivory);
+    transition: all 0.2s ease;
+  }
+  .pill:hover, .pill.active { background: var(--maroon); color: var(--ivory); border-color: var(--maroon); }
+  .pill.tips-pill { background: var(--teal); color: var(--ivory); border-color: var(--teal); }
+  .pill.tips-pill:hover { background: var(--teal-dark); }
+  .pill.form-pill { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+
+  /* Global Search Bar */
+  .search-container {
+    margin: 20px 0 30px;
+    position: relative;
+  }
+  .search-input {
+    width: 100%;
+    padding: 14px 20px 14px 45px;
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    background: var(--white);
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--ink);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    transition: border-color 0.2s;
+  }
+  .search-input:focus { outline: none; border-color: var(--maroon); }
+  .search-icon {
+    position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+    color: var(--ink-soft); font-size: 1.1rem;
+  }
+
+  /* Notice Box */
+  .notice {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left: 5px solid var(--gold);
+    border-radius: 8px;
+    padding: 24px;
+    margin: 10px 0 35px;
+    box-shadow: var(--shadow);
+  }
+  .notice h3 { margin: 0 0 12px; font-size: 1.1rem; color: var(--maroon-deep); display: flex; align-items: center; gap: 8px; }
+  .notice ul { margin: 0; padding-left: 20px; color: var(--ink-soft); font-size: 0.94rem; line-height: 1.7; }
+  .notice .foot { margin-top: 14px; font-size: 0.8rem; color: var(--ink-soft); font-style: italic; border-top: 1px dashed var(--line); padding-top: 8px; }
+
+  /* Interactive Registration Section */
+  #registration-section {
+    background: var(--paper-card);
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    padding: 32px;
+    margin: 40px 0 60px;
+    box-shadow: var(--shadow);
+  }
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+    margin-top: 20px;
+  }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-size: 0.85rem; font-weight: 700; color: var(--ink); }
+  .form-group input, .form-group select {
+    padding: 11px 14px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--white);
+    font-family: inherit;
+    font-size: 0.9rem;
+    color: var(--ink);
+  }
+  .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--maroon); }
+  
+  .confirmation-box {
+    margin-top: 20px;
+    background: #EAF5F2;
+    border: 1px solid #B8E2D8;
+    border-radius: 8px;
+    padding: 18px 22px;
+    color: var(--teal-dark);
+    display: none;
+  }
+  .confirmation-box.active { display: block; animation: fadeIn 0.3s ease; }
+
+  /* Registration Table Log */
+  .table-container {
+    overflow-x: auto;
+    margin-top: 24px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--white);
+  }
+  table.audit-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    text-align: left;
+  }
+  table.audit-table th {
+    background: var(--paper);
+    padding: 12px 14px;
+    color: var(--maroon-deep);
+    font-weight: 700;
+    border-bottom: 1px solid var(--line);
+  }
+  table.audit-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink-soft);
+  }
+  table.audit-table tr:last-child td { border-bottom: none; }
+
+  /* Group & Activity Display */
+  .group { padding: 40px 0 10px; }
+  .group-head {
+    display: flex; align-items: baseline; gap: 14px; margin-bottom: 6px; flex-wrap: wrap;
+  }
+  .group-num {
+    font-family: 'Fraunces', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--line);
+    line-height: 1;
+  }
+  .group-titles h2 { margin: 0; font-size: 1.6rem; color: var(--maroon-deep); }
+  .group-titles .hindi { font-size: 1.15rem; color: var(--ink-soft); font-weight: 500; }
+  .badge-compulsory {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+    color: var(--maroon-deep);
+    background: #F0DCC7;
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+  .group-bar { height: 3px; width: 60px; margin: 14px 0 24px; border-radius: 2px; }
+
+  .block { margin-bottom: 26px; }
+  .place-tag {
+    display: inline-block;
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+  .place-tag b { color: var(--ink); font-weight: 600; }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chip {
+    position: relative;
+    background: var(--white);
+    border: 1px solid var(--line);
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex; align-items: center; gap: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+  }
+  .chip:hover { border-color: var(--maroon); background: #FFFDF9; transform: translateY(-1px); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+  .chip .count {
+    font-size: 0.7rem;
+    background: var(--teal);
+    color: var(--ivory);
+    border-radius: 12px;
+    padding: 2px 8px;
+    font-weight: 700;
+  }
+
+  /* Accordion Tip Panel */
+  .tip-panel {
+    display: none;
+    margin-top: 12px;
+    background: var(--paper);
+    border: 1px dashed var(--line);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .tip-panel.open { display: block; animation: fadeIn 0.2s ease; }
+  .tip-panel h4 { margin: 0 0 12px; font-size: 0.95rem; color: var(--maroon-deep); }
+  .tip-list { list-style: none; margin: 0 0 16px; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .tip-item {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+  .tip-item .tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 99px;
+    border-radius: 10px;
+    margin-right: 8px;
+  }
+  .tip-empty { font-size: 0.85rem; color: var(--ink-soft); font-style: italic; margin-bottom: 12px; }
+  .tip-form { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .tag-select { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag-opt {
+    font-size: 0.78rem;
+    padding: 6px 12px;
+    border-radius: 16px;
+    border: 1.3px solid var(--line);
+    background: var(--white);
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.15s;
+  }
+  .tag-opt.selected { border-color: var(--maroon); background: var(--maroon); color: var(--ivory); }
+  .tip-form input[type=text] {
+    flex: 1; min-width: 200px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    font-family: inherit;
+    font-size: 0.88rem;
+    background: var(--white);
+  }
+  .tip-form button {
+    padding: 10px 18px;
+    border-radius: 6px;
+    border: none;
+    background: var(--teal);
+    color: var(--ivory);
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+  .tip-form button:hover { background: var(--teal-dark); }
+  .tip-note { font-size: 0.75rem; color: var(--ink-soft); margin-top: 10px; }
+
+  /* Moral Box */
+  .moral-box {
+    background: var(--maroon-deep);
+    color: var(--ivory);
+    padding: 24px 28px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    box-shadow: var(--shadow);
+  }
+
+  /* Tips Wall Section */
+  #tips-wall { padding: 50px 0 30px; }
+  .wall-head { margin-bottom: 24px; }
+  .wall-head p { color: var(--ink-soft); max-width: 620px; line-height: 1.6; }
+  .wall-select { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+  select#wall-activity {
+    flex: 1; min-width: 240px;
+    padding: 11px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    background: var(--white);
+    font-family: inherit;
+    font-size: 0.9rem;
+  }
+  #wall-feed { display: flex; flex-direction: column; gap: 12px; }
+
+  /* Senior Queries Section */
+  #senior-query-section {
+    padding: 50px 0 60px;
+    border-top: 1px dashed var(--line);
+  }
+  .query-box-container {
+    background: var(--paper-card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 28px;
+    margin-bottom: 35px;
+    box-shadow: var(--shadow);
+  }
+  .query-form { display: flex; flex-direction: column; gap: 14px; }
+  .query-form select, .query-form textarea, .query-form input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--white);
+    font-family: inherit;
+    font-size: 0.9rem;
+  }
+  .query-form textarea { resize: vertical; min-height: 90px; }
+  .query-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+  }
+  .query-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .query-activity {
+    font-size: 0.78rem;
+    background: var(--maroon);
+    color: var(--ivory);
+    padding: 4px 12px;
+    border-radius: 14px;
+    font-weight: 600;
+  }
+  .query-question { font-weight: 600; font-size: 0.98rem; color: var(--ink); margin-bottom: 14px; }
+  .replies-list {
+    margin-top: 14px;
+    padding-left: 16px;
+    border-left: 3px solid var(--teal);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .reply-item {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    background: var(--paper);
+    padding: 10px 14px;
+    border-radius: 6px;
+  }
+  .reply-form { display: flex; gap: 10px; margin-top: 14px; }
+  .reply-form input {
+    flex: 1;
+    padding: 9px 14px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--white);
+    font-size: 0.86rem;
+  }
+  .reply-form button {
+    padding: 9px 18px;
+    background: var(--teal);
+    color: var(--ivory);
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.86rem;
+  }
+
+  /* Floating AI Assistant Widget */
+  .bot-floating-btn {
+    position: fixed; right: 24px; bottom: 24px; z-index: 200;
+    background: var(--maroon); color: var(--ivory);
+    width: 56px; height: 56px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 24px rgba(122,31,61,0.4);
+    cursor: pointer; border: none; font-size: 1.5rem;
+    transition: transform 0.2s ease;
+  }
+  .bot-floating-btn:hover { transform: scale(1.08); }
+  
+  .bot-chat-window {
+    position: fixed; right: 24px; bottom: 90px; z-index: 200;
+    width: 360px; max-width: calc(100vw - 48px); height: 460px;
+    background: var(--white); border: 1px solid var(--line);
+    border-radius: 12px; box-shadow: 0 12px 36px rgba(0,0,0,0.15);
+    display: none; flex-direction: column; overflow: hidden;
+  }
+  .bot-chat-window.open { display: flex; animation: slideUp 0.25s ease; }
+  .bot-header {
+    background: var(--maroon-deep); color: var(--ivory);
+    padding: 14px 18px; display: flex; justify-content: space-between; align-items: center;
+  }
+  .bot-header h4 { margin: 0; font-size: 0.95rem; font-weight: 600; }
+  .bot-close { background: none; border: none; color: var(--ivory); cursor: pointer; font-size: 1.2rem; }
+  .bot-messages {
+    flex: 1; padding: 14px; overflow-y: auto; background: var(--ivory);
+    display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;
+  }
+  .chat-msg { max-width: 85%; padding: 10px 14px; border-radius: 12px; line-height: 1.4; }
+  .chat-msg.bot { background: var(--white); border: 1px solid var(--line); align-self: flex-start; border-bottom-left-radius: 2px; }
+  .chat-msg.user { background: var(--teal); color: var(--ivory); align-self: flex-end; border-bottom-right-radius: 2px; }
+  .bot-input-area { padding: 10px; border-top: 1px solid var(--line); display: flex; gap: 8px; background: var(--white); }
+  .bot-input-area input {
+    flex: 1; padding: 9px 12px; border: 1px solid var(--line); border-radius: 6px; font-size: 0.85rem;
+  }
+  .bot-input-area button {
+    background: var(--maroon); color: var(--ivory); border: none; border-radius: 6px; padding: 0 14px; font-weight: 600; cursor: pointer;
+  }
+
+  footer {
+    text-align: center;
+    padding: 40px 20px 60px;
+    color: var(--ink-soft);
+    font-size: 0.82rem;
+    border-top: 1px solid var(--line);
+    margin-top: 30px;
+    background: var(--paper);
+  }
+  footer a { color: var(--maroon); text-decoration: none; font-weight: 700; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 680px) {
+    h1.title { font-size: 1.8rem; }
+    .title .hindi { font-size: 2.1rem; }
+    .group-num { font-size: 2.2rem; }
+    #registration-section { padding: 20px; }
+  }
+
+  /* Review System */
+  .review-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:16px 0 20px;}
+  .review-summary{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:20px;margin-bottom:20px;box-shadow:var(--shadow);}
+  .review-summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:15px;}
+  .review-stat{background:var(--paper);border-radius:8px;padding:12px;}
+  .review-stat strong{display:block;color:var(--maroon-deep);margin-bottom:4px;}
+  .review-card{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:12px;}
+  .review-card-head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  .review-stars{color:var(--gold);letter-spacing:2px;}
+  .review-meta{font-size:.82rem;color:var(--ink-soft);margin:4px 0 10px;}
+  .review-tag{display:inline-block;background:#f3ece8;border-radius:999px;padding:4px 9px;margin:3px 4px 3px 0;font-size:.78rem;}
+  .helpful-btn{border:1px solid var(--line);background:var(--white);border-radius:999px;padding:7px 12px;cursor:pointer;margin-top:10px;}
+  .review-modal{display:none;position:fixed;inset:0;z-index:10000;align-items:center;justify-content:center;padding:18px;}
+  .review-modal.open{display:flex;}
+  .review-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.55);}
+  .review-dialog{position:relative;z-index:1;background:var(--white);width:min(580px,100%);max-height:92vh;overflow:auto;border-radius:14px;padding:26px;box-shadow:0 25px 80px rgba(0,0,0,.25);}
+  .review-close{position:absolute;right:14px;top:8px;border:0;background:transparent;font-size:28px;cursor:pointer;}
+  .review-dialog label{display:block;font-weight:700;margin:14px 0 6px;}
+  .review-dialog select,.review-dialog textarea{width:100%;box-sizing:border-box;padding:11px 13px;border:1px solid var(--line);border-radius:7px;background:var(--white);font:inherit;}
+  .star-picker{display:flex;gap:4px;margin:4px 0;}
+  .star-picker button{border:0;background:transparent;font-size:32px;color:#bbb;cursor:pointer;}
+  .star-picker button.active{color:var(--gold);}
+  .choice-row{display:flex;gap:8px;flex-wrap:wrap;}
+  .choice-row button{border:1px solid var(--line);background:var(--white);border-radius:999px;padding:8px 13px;cursor:pointer;}
+  .choice-row button.active{background:var(--maroon);color:white;border-color:var(--maroon);}
+  @media(max-width:700px){.review-summary-grid{grid-template-columns:1fr;}}
+
+</style>
+</head>
+<body>
+
+<!-- Top Banner -->
+<div class="ribbon">
+  <span>Banasthali Vidyapith</span>
+  <span class="ribbon-dot"></span>
+  <span>Panchmukhi Shiksha Circular, 29 Dec 2025</span>
+  <span class="ribbon-dot"></span>
+  <span>Session 2025–26</span>
+</div>
+
+<!-- Header Hero -->
+<header class="hero">
+  <div class="fold-mark"><span></span><span></span><span></span><span></span><span></span></div>
+  <div class="eyebrow">Official Student Activity Portal &amp; Senior Guide</div>
+  <h1 class="title">
+    <span class="hindi">पंचमुखी शिक्षा</span>
+    FiveFold
+  </h1>
+  <p class="subtitle">
+    Everything about this year's Panchmukhi Shiksha activities in one place — Aesthetic, Physical, Practical, and Moral Education.
+    Apply directly online, log form filling timestamps, and check real advice from seniors.
+  </p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="#registration-section">Apply Online Now ↓</a>
+    <a class="btn btn-teal" href="#tips-wall">Read Senior Tips 💬</a>
+    <a class="btn btn-ghost" href="#senior-query-section">Ask a Question ❓</a>
+  </div>
+</header>
+
+<!-- Quick Stats Counter -->
+<div class="metrics-grid">
+  <div class="metric-card">
+    <div class="metric-val" id="stat-activities">50+</div>
+    <div class="metric-label">Total Activities</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-val" id="stat-submissions">0</div>
+    <div class="metric-label">Forms Logged</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-val" id="stat-tips">0</div>
+    <div class="metric-label">Senior Tips</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-val" id="stat-queries">0</div>
+    <div class="metric-label">Community Queries</div>
+  </div>
+</div>
+
+<!-- Main Container -->
+<div class="wrap">
+  
+  <!-- Guidelines Notice -->
+  <div class="notice">
+    <h3>📌 Essential Circular Instructions Before Applying</h3>
+    <ul>
+      <li>Participation in Panchmukhi Shiksha is compulsory for every UG/PG student. Group 4 (Moral Education) is compulsory for all — in addition, you pick <b>one activity each</b> from Groups 1, 2, and 3, and may apply to a <b>maximum of two</b> in total.</li>
+      <li>Moral Education carries 1 credit. Of your chosen activities, your best one earns 1 credit and the other is graded only.</li>
+      <li>Repeating an activity from a previous year is allowed, but it will only be graded, not credited again.</li>
+      <li>Grades from these activities are added to your marksheet and affect your overall result.</li>
+      <li>PG students: 1st/2nd semester activities are credited; 3rd/4th semester (final year) activities are graded only.</li>
+      <li>Application deadline as per circular: on or before <b>18 January 2026</b> (or as indicated on your department notice board).</li>
+    </ul>
+    <div class="foot">Official Portal Link: <a href="https://script.google.com/a/macros/banasthali.in/s/AKfycbz0XXgjZKGgg1LW8qJfdss6751MaH2KdixIMysNYufq89EgWW_e8MI7HfmassGdkPxoaQ/exec" target="_blank" rel="noopener">Google Apps Script Webhook Endpoint</a></div>
+  </div>
+
+  <!-- Online Selection Form -->
+  <section id="registration-section">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px;">
+      <div>
+        <div class="eyebrow" style="color:var(--maroon);">Interactive Application Engine</div>
+        <h2 style="margin:4px 0 0; color:var(--maroon-deep);">Online Five-Fold Activity Selection</h2>
+      </div>
+      <span class="badge-compulsory" style="background:var(--teal); color:white;">Live Webhook Integration</span>
+    </div>
+    
+    <form id="fivefold-reg-form" onsubmit="handleRegistration(event)">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Full Student Name *</label>
+          <input type="text" id="reg-name" placeholder="e.g. Aditi Sharma" required />
+        </div>
+        <div class="form-group">
+          <label>Roll Number *</label>
+          <input type="text" id="reg-roll" placeholder="e.g. BT2023042" required />
+        </div>
+        <div class="form-group">
+          <label>Banasthali Email *</label>
+          <input type="email" id="reg-email" placeholder="student@banasthali.in" required />
+        </div>
+        <div class="form-group">
+          <label>Department &amp; Year *</label>
+          <input type="text" id="reg-dept" placeholder="e.g. B.Tech 3rd Year (CSE)" required />
+        </div>
+        <div class="form-group" style="grid-column: 1 / -1;">
+          <label>Select Primary Five-Fold Activity *</label>
+          <select id="reg-activity" required>
+            <option value="">— Choose Activity from Groups 1, 2, or 3 —</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="margin-top:20px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+        <button type="submit" class="btn btn-primary" id="submit-btn">Submit Selection &amp; Record Timestamp</button>
+        <span style="font-size:0.8rem; color:var(--ink-soft);">Dispatches data directly to Banasthali Google Apps Script portal.</span>
+      </div>
+    </form>
+
+    <div id="confirmation-panel" class="confirmation-box">
+      <div style="font-weight:700; font-size:1.05rem; margin-bottom:6px;">✓ Selection Recorded &amp; Logged!</div>
+      <div id="confirmation-details" style="font-size:0.9rem; line-height:1.6;"></div>
+    </div>
+
+    <!-- Live Submissions Audit Table -->
+    <div style="margin-top:30px;">
+      <h3 style="font-size:1rem; color:var(--maroon-deep); margin-bottom:10px;">Recent Form Registrations &amp; Timestamp Log</h3>
+      <div class="table-container">
+        <table class="audit-table">
+          <thead>
+            <tr>
+              <th>Roll No</th>
+              <th>Student Name</th>
+              <th>Selected Activity</th>
+              <th>Form Filling Timestamp</th>
+              <th>FCFS Priority Rank</th>
+            </tr>
+          </thead>
+          <tbody id="audit-table-body">
+            <tr>
+              <td colspan="5" style="text-align:center; color:var(--ink-soft); font-style:italic;">No registrations recorded in this session yet.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Navigation Pills -->
+<nav class="pills">
+  <div class="pills-inner">
+    <a class="pill active" href="#g1">① Aesthetic</a>
+    <a class="pill" href="#g2">② Physical</a>
+    <a class="pill" href="#g3">③ Practical</a>
+    <a class="pill" href="#g4">④ Moral</a>
+    <a class="pill form-pill" href="#registration-section">📝 Online Form</a>
+    <a class="pill tips-pill" href="#tips-wall">💬 Senior Tips</a>
+    <a class="pill tips-pill" style="background:var(--maroon); border-color:var(--maroon);" href="#senior-query-section">❓ Senior Query</a>
+  </div>
+</nav>
+
+<!-- Activity Explorer Section -->
+<div class="wrap">
+
+  <!-- Search Filter -->
+  <div class="search-container">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="global-search" class="search-input" placeholder="Search any activity (e.g. Aerobics, Kathak, Flying, Photography, Jewellery)..." oninput="filterActivities()" />
+  </div>
+
+  <div id="groups-root"></div>
+</div>
+
+<!-- Senior Tips Wall -->
+<section id="tips-wall" class="wrap">
+  <div class="wall-head">
+    <div class="eyebrow" style="color:var(--maroon);">From Seniors, For Juniors</div>
+    <h2 style="margin:6px 0;">Senior Insider Reviews &amp; Advice Wall</h2>
+    <p>Honest notes from upperclassmen on coordinator strictness, leave flexibilities, and practice workloads. Filter tips by activity below.</p>
+  </div>
+  <div class="review-actions">
+    <select id="wall-activity" style="flex:1;min-width:240px;"></select>
+    <button type="button" class="btn btn-primary" onclick="openReviewModal()" style="border:none;">✍️ Write a Review</button>
+  </div>
+  <div id="review-summary-area"></div>
+  <div id="wall-feed"></div>
+</section>
+
+
+<!-- Write Review Modal -->
+<div id="review-modal" class="review-modal" aria-hidden="true">
+  <div class="review-backdrop" onclick="closeReviewModal()"></div>
+  <div class="review-dialog" role="dialog" aria-modal="true" aria-labelledby="review-title">
+    <button class="review-close" type="button" onclick="closeReviewModal()">×</button>
+    <h2 id="review-title" style="margin-top:0;color:var(--maroon-deep);">✍️ Share Your Experience</h2>
+    <p style="color:var(--ink-soft);">Help juniors understand what an activity is really like.</p>
+    <label for="review-activity">Activity *</label>
+    <select id="review-activity"><option value="">Select an activity...</option></select>
+    <label>Your Year *</label>
+    <select id="review-year"><option value="">Select year...</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option><option>Alumni</option></select>
+    <label>Overall Rating *</label>
+    <div class="star-picker" id="star-picker">
+      <button type="button" data-star="1">☆</button><button type="button" data-star="2">☆</button><button type="button" data-star="3">☆</button><button type="button" data-star="4">☆</button><button type="button" data-star="5">☆</button>
+    </div>
+    <label>Attendance</label>
+    <div class="choice-row" id="review-attendance"><button type="button" data-value="Relaxed">😌 Relaxed</button><button type="button" data-value="Moderate">🟡 Moderate</button><button type="button" data-value="Strict">🔴 Strict</button></div>
+    <label>Workload</label>
+    <div class="choice-row" id="review-workload"><button type="button" data-value="Low">Low</button><button type="button" data-value="Medium">Medium</button><button type="button" data-value="High">High</button></div>
+    <label>Would you recommend it?</label>
+    <div class="choice-row" id="review-recommend"><button type="button" data-value="Yes">👍 Yes</button><button type="button" data-value="No">👎 No</button></div>
+    <label for="review-text">Your Experience *</label>
+    <textarea id="review-text" rows="5" maxlength="1000" placeholder="Tell juniors about attendance, workload, faculty, practice, benefits, or anything important..."></textarea>
+    <button type="button" class="btn btn-primary" onclick="submitReview()" style="border:none;width:100%;margin-top:18px;">Submit Review</button>
+  </div>
+</div>
+
+<!-- Community Query Section -->
+<section id="senior-query-section" class="wrap">
+  <div class="wall-head">
+    <div class="eyebrow" style="color:var(--teal);">Community Q&amp;A</div>
+    <h2 style="margin:6px 0;">Ask Seniors Directly</h2>
+    <p>Have specific doubts regarding timetable overlaps, venue requirements, or practice hours? Ask seniors below.</p>
+  </div>
+
+  <div class="query-box-container">
+    <h3 style="margin-top:0; color:var(--maroon-deep);">Post a Question to Seniors</h3>
+    <div class="query-form">
+      <label for="query-activity-select" style="font-weight:700;color:var(--maroon-deep);">Select Activity *</label>
+      <select id="query-activity-select">
+        <option value="">Select Activity related to your question...</option>
+      </select>
+      <textarea id="query-input" placeholder="Type your query here... (e.g. Is attendance strictly taken daily for Badminton at Vidula Maidan?)"></textarea>
+      <button type="button" class="btn btn-primary" onclick="submitQuery()" style="align-self:flex-start; border:none;">Submit Question</button>
+    </div>
+  </div>
+
+  <div id="queries-feed"></div>
+</section>
+
+<!-- Floating AI Assistant Widget -->
+<button class="bot-floating-btn" onclick="toggleBotWindow()" title="Ask Senior AI Bot">💬</button>
+<div class="bot-chat-window" id="bot-window">
+  <div class="bot-header">
+    <h4>Senior Insider AI Assistant</h4>
+    <button class="bot-close" onclick="toggleBotWindow()">✕</button>
+  </div>
+  <div class="bot-messages" id="bot-msgs">
+    <div class="chat-msg bot">Hi! Ask me anything about activity strictness, timings, or leave rules for Panchmukhi Shiksha!</div>
+  </div>
+  <div class="bot-input-area">
+    <input type="text" id="bot-input" placeholder="Ask about strictness or timings..." onkeypress="handleBotKeyPress(event)" />
+    <button onclick="sendBotMessage()">Ask</button>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  Built for students, by students — An Unofficial Unified Platform for Panchmukhi Shiksha.<br>
+  Official Google Script Webhook Endpoint: <a href="https://script.google.com/a/macros/banasthali.in/s/AKfycbz0XXgjZKGgg1LW8qJfdss6751MaH2KdixIMysNYufq89EgWW_e8MI7HfmassGdkPxoaQ/exec" target="_blank" rel="noopener">AKfycbz0...PxoaQ/exec</a>
+</footer>
+
+<script>
+// Registration Endpoint
+const REGISTER_URL = "https://script.google.com/a/macros/banasthali.in/s/AKfycbz0XXgjZKGgg1LW8qJfdss6751MaH2KdixIMysNYufq89EgWW_e8MI7HfmassGdkPxoaQ/exec";
+
+// Master Panchmukhi Shiksha Data
+const GROUPS = [
+  {
+    id:"g1", num:"01", color:"var(--gold)",
+    title:"Aesthetic Education", hindi:"सौन्दर्यपरक शिक्षा",
+    blocks:[
+      { place:"Dance Centre", items:["Classical Dance (Bharatnatyam / Kathak / Manipuri)","Folk Dance"] },
+      { place:"Kala Mandir / Shilp Mandir", items:["Creative Art"] },
+      { place:"Sur Mandir · Evening (5:00–6:00 PM)", items:["Music – Instrumental (Guitar / Orchestra / Sarod / Sitar / Tabla / Violin)","Music – Vocal","Theatre","Banasthali Band"] },
+    ]
+  },
+  {
+    id:"g2", num:"02", color:"var(--teal)",
+    title:"Physical Education", hindi:"शारीरिक शिक्षा",
+    blocks:[
+      { place:"Room No. 10, Gyan Mandir (12:00 Noon – 1:00 PM) or Vidula Maidan — Morning (6:00–8:00 AM) & Evening (5:00–8:00 PM)",
+        items:["Aerobics","Archery","Athletics","Badminton","Basketball","Cricket","Equestrian","Handball","Hockey","Martial Arts","Flying – Flight Radio Telephone Operator's Licence (Restricted)","Flying – Student Pilot's Licence (Restricted)","Kabaddi","Kho-Kho","Net Ball","Rope Mallakhamb","Shooting","Soft Ball","Football","Gymnastics","Swimming","Table Tennis","Tennis","Throwball","Volleyball","Weight Training","Yoga","Combative Sports","Pole Mallakhamb","Squash","Fencing","Rugby","Chess"] },
+      { place:"In front of Vani Mandir · Evening Session (5:00–7:00 PM)", items:["Banasthali Sewa Dal (BSD)"] },
+      { place:"NSS Office, Vidya Mandir · Selected students only", items:["National Service Scheme (NSS)","National Cadet Corps (NCC)"] },
+    ]
+  },
+  {
+    id:"g3", num:"03", color:"var(--maroon)",
+    title:"Practical Education", hindi:"व्यावहारिक शिक्षा",
+    blocks:[
+      { place:"Room No. 108, Department of Design (Shilp Mandir)",
+        items:["Art & Craft with Ornamental Design (2D & 3D)","Jewellery Design","Art & Craft with Ornamental Design (Ropes)","Modernization of Ancient Art by Block Printing","Art & Crafts with Fabric","Photography Lab","Craft and Design Methods","Soft Material Studies Lab","Design for Commercially Profitable Project","Stencil Printing","Digital Art Lab","Surface Ornamentation","Fabric Construction in Textile","Woven Design","Hand Embroidery","Yarn Craft"] },
+      { place:"Vani Mandir", items:["Extension Programs for Women Empowerment"] },
+      { place:"FM Radio, Vigyan Mandir", items:["FM Radio"] },
+      { place:"Anopcharik Shiksha Kendra", items:["Informal Education"] },
+      { place:"Department of Home Science (Gyan Mandir)", items:["Nutri Gardening and Post-Harvest Value Addition","Raising Responsible Kids"] },
+      { place:"Department of Psychology (Vani Mandir)", items:["Life Skills"] },
+      { place:"Department of Commerce and Management (Pragya Mandir)", items:["Social Intelligence and Conflict Resolution","Personal Finance Advisory – I","Personal Finance Advisory – II"] },
+    ]
+  },
+];
+
+const MORAL = {
+  id:"g4", num:"04",
+  title:"Moral Education", hindi:"नैतिक शिक्षा",
+  activity:"Banasthali Campus Ethics",
+  desc:"Compliance with Vidyapith rules, khadi wearing, discipline, participation in national and cultural festivals, Vidyapith activities, and social conduct. Compulsory for every student."
+};
+
+const TAGS = [
+  {key:"chill", label:"😌 Chill mam", color:"var(--teal)"},
+  {key:"strict", label:"😤 Strict mam", color:"var(--maroon)"},
+  {key:"easy-attendance", label:"🎉 Easy attendance", color:"var(--teal)"},
+  {key:"tough-attendance", label:"📌 Attendance tracked closely", color:"var(--maroon)"},
+  {key:"worth-it", label:"👍 Worth it", color:"var(--gold)"},
+  {key:"time-heavy", label:"⏳ Time-consuming", color:"var(--ink-soft)"},
+];
+
+function slugify(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,""); }
+
+const ALL_ACTIVITIES = [];
+GROUPS.forEach(g => g.blocks.forEach(b => b.items.forEach(name => ALL_ACTIVITIES.push(name))));
+ALL_ACTIVITIES.push(MORAL.activity);
+
+// State Management with Universal Storage Fallback
+let TIPS = {};
+let QUERIES = [];
+let REGISTRATIONS = [];
+
+function loadStorageData() {
+  try {
+    const tipsRaw = localStorage.getItem("fivefold-tips");
+    TIPS = tipsRaw ? JSON.parse(tipsRaw) : {};
+    
+    const queriesRaw = localStorage.getItem("fivefold-queries");
+    QUERIES = queriesRaw ? JSON.parse(queriesRaw) : [];
+
+    const regsRaw = localStorage.getItem("fivefold-regs");
+    REGISTRATIONS = regsRaw ? JSON.parse(regsRaw) : [];
+  } catch(e) {
+    TIPS = {}; QUERIES = []; REGISTRATIONS = [];
+  }
+}
+
+function saveStorageData() {
+  try {
+    localStorage.setItem("fivefold-tips", JSON.stringify(TIPS));
+    localStorage.setItem("fivefold-queries", JSON.stringify(QUERIES));
+    localStorage.setItem("fivefold-regs", JSON.stringify(REGISTRATIONS));
+  } catch(e) {}
+  updateMetrics();
+}
+
+function tipCount(name){
+  const s = slugify(name);
+  return (TIPS[s] || []).length;
+}
+
+function tagMeta(key){
+  return TAGS.find(t=>t.key===key) || {label:key, color:"var(--ink-soft)"};
+}
+
+// Render Panchmukhi Shiksha Groups
+function renderGroups(){
+  const root = document.getElementById("groups-root");
+  let html = "";
+
+  GROUPS.forEach(g => {
+    html += `<section class="group" id="${g.id}">
+      <div class="group-head">
+        <div class="group-num">${g.num}</div>
+        <div class="group-titles">
+          <h2>${g.title}</h2>
+          <div class="hindi">${g.hindi}</div>
+        </div>
+      </div>
+      <div class="group-bar" style="background:${g.color}"></div>`;
+
+    g.blocks.forEach((b, bi) => {
+      html += `<div class="block">
+        <div class="place-tag"><b>Where &amp; when:</b> ${b.place}</div>
+        <div class="chips">`;
+      b.items.forEach(name => {
+        const slug = slugify(name);
+        html += `<div class="chip" data-slug="${slug}" data-name="${name.replace(/"/g,'&quot;')}">
+          ${name}
+          ${tipCount(name) > 0 ? `<span class="count">${tipCount(name)}</span>` : ""}
+        </div>`;
+      });
+      html += `</div>
+        <div class="tip-panel" id="panel-${bi}-${g.id}"></div>
+      </div>`;
+    });
+
+    html += `</section>`;
+  });
+
+  // Moral Block
+  html += `<section class="group" id="g4">
+    <div class="group-head">
+      <div class="group-num">04</div>
+      <div class="group-titles">
+        <h2>${MORAL.title}</h2>
+        <div class="hindi">${MORAL.hindi}</div>
+        <div class="badge-compulsory">Compulsory for all students</div>
+      </div>
+    </div>
+    <div class="group-bar" style="background:var(--maroon-deep)"></div>
+    <div class="moral-box">
+      <b>${MORAL.activity}</b><br>${MORAL.desc}
+    </div>
+    <div class="block" style="margin-top:16px;">
+      <div class="chips">
+        <div class="chip" data-slug="${slugify(MORAL.activity)}" data-name="${MORAL.activity}">
+          ${MORAL.activity}
+          ${tipCount(MORAL.activity) > 0 ? `<span class="count">${tipCount(MORAL.activity)}</span>` : ""}
+        </div>
+      </div>
+      <div class="tip-panel" id="panel-moral"></div>
+    </div>
+  </section>`;
+
+  root.innerHTML = html;
+  attachChipHandlers();
+}
+
+function tipPanelBody(name, panelId){
+  const slug = slugify(name);
+  const list = TIPS[slug] || [];
+  let listHtml = "";
+  if(list.length === 0){
+    listHtml = `<div class="tip-empty">No senior tips posted yet for this activity. Be the first to add one!</div>`;
+  } else {
+    listHtml = `<ul class="tip-list">` + list.slice().reverse().map(t => {
+      const meta = tagMeta(t.tag);
+      return `<li class="tip-item"><span class="tag" style="background:${meta.color};color:#FBF5E9;">${meta.label}</span>${t.text ? t.text : ""}</li>`;
+    }).join("") + `</ul>`;
+  }
+
+  return `
+    <h4>Senior Tips &amp; Insights for "${name}"</h4>
+    ${listHtml}
+    <div class="tip-form" data-slug="${slug}" data-panel="${panelId}">
+      <div class="tag-select">
+        ${TAGS.map(t => `<span class="tag-opt" data-tag="${t.key}">${t.label}</span>`).join("")}
+      </div>
+      <input type="text" maxlength="140" placeholder="Optional senior note (e.g. 'Submit leave prior to exam days')" />
+      <button type="button">Post Tip</button>
+    </div>
+    <div class="tip-note">Visible to all students. Keep insights helpful, accurate, and kind.</div>
+  `;
+}
+
+function attachChipHandlers(){
+  document.querySelectorAll(".chip").forEach(chip => {
+    chip.addEventListener("click", () => {
+      const slug = chip.dataset.slug;
+      const name = chip.dataset.name;
+      const panel = chip.closest(".block").querySelector(".tip-panel");
+      const isOpen = panel.classList.contains("open");
+      
+      document.querySelectorAll(".tip-panel.open").forEach(p => { if(p!==panel){ p.classList.remove("open"); p.innerHTML=""; }});
+      if(isOpen){
+        panel.classList.remove("open");
+        panel.innerHTML = "";
+      } else {
+        panel.innerHTML = tipPanelBody(name, panel.id);
+        panel.classList.add("open");
+        attachFormHandler(panel, name);
+      }
+    });
+  });
+}
+
+function attachFormHandler(panel, name){
+  const form = panel.querySelector(".tip-form");
+  let selectedTag = null;
+  form.querySelectorAll(".tag-opt").forEach(opt => {
+    opt.addEventListener("click", () => {
+      form.querySelectorAll(".tag-opt").forEach(o=>o.classList.remove("selected"));
+      opt.classList.add("selected");
+      selectedTag = opt.dataset.tag;
+    });
+  });
+  form.querySelector("button").addEventListener("click", () => {
+    if(!selectedTag){
+      alert("Please select a quick tag (e.g., Chill mam / Strict mam) first.");
+      return;
+    }
+    const text = form.querySelector("input").value.trim();
+    const slug = form.dataset.slug;
+    TIPS[slug] = TIPS[slug] || [];
+    TIPS[slug].push({ tag: selectedTag, text, ts: Date.now() });
+    saveStorageData();
+    renderGroups();
+    renderWall();
+    
+    const reopened = document.querySelector(`.chip[data-slug="${slug}"]`);
+    if(reopened) reopened.click();
+  });
+}
+
+function renderOptions(){
+  const regSel = document.getElementById("reg-activity");
+  const wallSel = document.getElementById("wall-activity");
+  const querySel = document.getElementById("query-activity-select");
+
+  const optionsHtml = ALL_ACTIVITIES.map(name => `<option value="${name}">${name}</option>`).join("");
+  
+  regSel.innerHTML = `<option value="">— Select Activity from Group 1, 2, or 3 —</option>` + optionsHtml;
+  wallSel.innerHTML = `<option value="">— View tips across all activities —</option>` + ALL_ACTIVITIES.map(name => `<option value="${slugify(name)}">${name}</option>`).join("");
+  querySel.innerHTML = `<option value="">Select Activity related to your question...</option>` + optionsHtml;
+
+  wallSel.addEventListener("change", renderWall);
+}
+
+function renderWall(){
+  const sel = document.getElementById("wall-activity");
+  const feed = document.getElementById("wall-feed");
+  const slug = sel.value;
+
+  if(!slug){
+    const entries = [];
+    Object.keys(TIPS).forEach(s => (TIPS[s]||[]).forEach(t => entries.push({slug:s, ...t})));
+    entries.sort((a,b)=>b.ts-a.ts);
+    if(entries.length === 0){
+      feed.innerHTML = `<div class="tip-empty">No senior tips shared yet. Select an activity above to post the first note!</div>`;
+      renderReviewSummary();
+      return;
+    }
+    feed.innerHTML = entries.slice(0,25).map(t => {
+      const name = ALL_ACTIVITIES.find(n => slugify(n)===t.slug) || t.slug;
+      const meta = tagMeta(t.tag);
+      return `<div class="tip-item"><b>${name}</b><br><span class="tag" style="background:${meta.color};color:#FBF5E9;">${meta.label}</span>${t.text||""}</div>`;
+    }).join("");
+    renderReviewSummary();
+    return;
+  }
+
+  const list = TIPS[slug] || [];
+  const name = ALL_ACTIVITIES.find(n => slugify(n)===slug) || slug;
+  if(list.length === 0){
+    feed.innerHTML = `<div class="tip-empty">No senior tips posted yet for "${name}".</div>`;
+    renderReviewSummary();
+    return;
+  }
+  feed.innerHTML = list.slice().reverse().map(t => {
+    const meta = tagMeta(t.tag);
+    return `<div class="tip-item"><span class="tag" style="background:${meta.color};color:#FBF5E9;">${meta.label}</span>${t.text||""}</div>`;
+  }).join("");
+  renderReviewSummary();
+}
+
+/* Online Registration Form Handling with Safe Error Handling */
+async function handleRegistration(e) {
+  e.preventDefault();
+  const name = document.getElementById("reg-name").value.trim();
+  const roll = document.getElementById("reg-roll").value.trim();
+  const email = document.getElementById("reg-email").value.trim();
+  const dept = document.getElementById("reg-dept").value.trim();
+  const activity = document.getElementById("reg-activity").value;
+
+  if (!name || !roll || !email || !dept || !activity) return;
+
+  const btn = document.getElementById("submit-btn");
+  btn.disabled = true;
+  btn.innerText = "Processing Selection...";
+
+  const now = new Date();
+  const formattedTime = now.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+  const countForActivity = REGISTRATIONS.filter(r => r.activityTitle === activity).length;
+  const fcfsRank = countForActivity + 1;
+
+  const payload = {
+    registrationId: `REG_${Date.now()}`,
+    studentName: name,
+    rollNo: roll,
+    email: email,
+    department: dept,
+    activityTitle: activity,
+    submittedAt: formattedTime,
+    fcfsRank: fcfsRank
+  };
+
+  try {
+    await fetch(REGISTER_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(err => console.warn("Webhook notification warning:", err));
+  } catch (err) {
+    console.warn("Execution warning:", err);
+  }
+
+  REGISTRATIONS.unshift(payload);
+  saveStorageData();
+  renderAuditTable();
+
+  const confirmPanel = document.getElementById("confirmation-panel");
+  const confirmDetails = document.getElementById("confirmation-details");
+  confirmDetails.innerHTML = `
+    <strong>Student:</strong> ${name} (${roll})<br>
+    <strong>Activity:</strong> ${activity}<br>
+    🕒 <strong>Form Filling Timestamp:</strong> <span style="font-family:monospace; background:#D0ECE5; padding:2px 6px; border-radius:4px;">${formattedTime}</span><br>
+    🥇 <strong>First-Come, First-Served (FCFS) Rank:</strong> #${fcfsRank}
+  `;
+  confirmPanel.classList.add("active");
+
+  btn.disabled = false;
+  btn.innerText = "Submit Selection & Record Timestamp";
+  document.getElementById("fivefold-reg-form").reset();
+}
+
+function renderAuditTable(){
+  const tbody = document.getElementById("audit-table-body");
+  if(REGISTRATIONS.length === 0){
+    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:var(--ink-soft); font-style:italic;">No registrations recorded in this session yet.</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = REGISTRATIONS.map(r => `
+    <tr>
+      <td style="font-weight:700; color:var(--ink);">${r.rollNo}</td>
+      <td>${r.studentName}</td>
+      <td>${r.activityTitle}</td>
+      <td style="font-family:monospace;">${r.submittedAt}</td>
+      <td style="font-weight:700; color:var(--maroon);">#${r.fcfsRank}</td>
+    </tr>
+  `).join("");
+}
+
+
+/* Senior Review System */
+let reviewRating=0;
+const reviewChoice={attendance:"",workload:"",recommend:""};
+function getReviews(){try{return JSON.parse(localStorage.getItem("fivefold-reviews")||"[]")}catch(e){return []}}
+function saveReviews(a){try{localStorage.setItem("fivefold-reviews",JSON.stringify(a))}catch(e){}}
+function populateReviewActivity(){
+  const a=document.getElementById("review-activity"); if(!a)return;
+  const names=ALL_ACTIVITIES||[];
+  a.innerHTML='<option value="">Select an activity...</option>'+names.map(n=>`<option value="${String(n).replace(/"/g,'&quot;')}">${n}</option>`).join('');
+}
+function openReviewModal(){populateReviewActivity(); const wall=document.getElementById('wall-activity'); const sel=document.getElementById('review-activity'); if(wall&&wall.value&&sel) {const name=ALL_ACTIVITIES.find(n=>slugify(n)===wall.value); if(name)sel.value=name;} document.getElementById('review-modal').classList.add('open');}
+function closeReviewModal(){document.getElementById('review-modal').classList.remove('open');}
+document.addEventListener('click',function(e){
+  const star=e.target.closest('#star-picker button');
+  if(star){reviewRating=Number(star.dataset.star);document.querySelectorAll('#star-picker button').forEach(b=>{const on=Number(b.dataset.star)<=reviewRating;b.classList.toggle('active',on);b.textContent=on?'★':'☆';});}
+  const choice=e.target.closest('.choice-row button');
+  if(choice){const row=choice.parentElement;row.querySelectorAll('button').forEach(b=>b.classList.remove('active'));choice.classList.add('active');if(row.id==='review-attendance')reviewChoice.attendance=choice.dataset.value;if(row.id==='review-workload')reviewChoice.workload=choice.dataset.value;if(row.id==='review-recommend')reviewChoice.recommend=choice.dataset.value;}
+});
+function submitReview(){
+  const activity=document.getElementById('review-activity').value, year=document.getElementById('review-year').value, text=document.getElementById('review-text').value.trim();
+  if(!activity||!year||!reviewRating||!text){alert('Please select activity, year, rating and write your experience.');return;}
+  const reviews=getReviews(); reviews.unshift({id:Date.now(),activity,year,rating:reviewRating,attendance:reviewChoice.attendance||'Not specified',workload:reviewChoice.workload||'Not specified',recommend:reviewChoice.recommend||'Not specified',text,helpful:0,verified:false,ts:Date.now()}); saveReviews(reviews);
+  closeReviewModal(); document.getElementById('review-text').value=''; document.getElementById('review-year').value=''; reviewRating=0; reviewChoice.attendance=reviewChoice.workload=reviewChoice.recommend=''; document.querySelectorAll('#star-picker button').forEach(b=>{b.classList.remove('active');b.textContent='☆'}); document.querySelectorAll('.choice-row button').forEach(b=>b.classList.remove('active')); renderWall(); alert('Review added successfully!');
+}
+function markReviewHelpful(id){const reviews=getReviews();const r=reviews.find(x=>x.id===id);if(r){r.helpful=(r.helpful||0)+1;saveReviews(reviews);renderWall();}}
+function renderReviewSummary(){
+  const area=document.getElementById('review-summary-area');if(!area)return; const slug=document.getElementById('wall-activity').value;
+  if(!slug){area.innerHTML='';return;} const name=ALL_ACTIVITIES.find(n=>slugify(n)===slug)||slug; const list=getReviews().filter(r=>r.activity===name);
+  if(!list.length){area.innerHTML='';return;} const avg=list.reduce((s,r)=>s+Number(r.rating||0),0)/list.length; const rec=Math.round(list.filter(r=>r.recommend==='Yes').length/list.length*100); const stars='★'.repeat(Math.round(avg))+'☆'.repeat(5-Math.round(avg));
+  const cards=list.slice(0,8).map(r=>`<div class="review-card"><div class="review-card-head"><div><b>${r.verified?'🟢 Verified Senior':'👤 Senior'}</b> · ${r.year}</div><div class="review-stars">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div></div><div class="review-meta">${new Date(r.ts).toLocaleDateString()}</div><p style="margin:8px 0;">${escapeHtml(r.text)}</p><span class="review-tag">Attendance: ${r.attendance}</span><span class="review-tag">Workload: ${r.workload}</span><span class="review-tag">${r.recommend==='Yes'?'👍 Recommended':r.recommend==='No'?'👎 Not recommended':'Recommendation not specified'}</span><br><button class="helpful-btn" type="button" onclick="markReviewHelpful(${r.id})">👍 Helpful · ${r.helpful||0}</button></div>`).join('');
+  area.innerHTML=`<div class="review-summary"><div class="review-card-head"><div><h3 style="margin:0;">${name} — Senior Experience</h3><div class="review-meta">${list.length} review${list.length===1?'':'s'}</div></div><div><span class="review-stars">${stars}</span> <b>${avg.toFixed(1)}/5</b></div></div><div class="review-summary-grid"><div class="review-stat"><strong>👍 Recommendation</strong>${rec}%</div><div class="review-stat"><strong>🔴 Attendance</strong>${list.filter(r=>r.attendance==='Strict').length} marked strict</div><div class="review-stat"><strong>💬 Reviews</strong>${list.length}</div></div></div>${cards}`;
+}
+function escapeHtml(x){return String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+/* Community Queries System */
+function submitQuery(){
+  const activity = document.getElementById("query-activity-select").value;
+  const question = document.getElementById("query-input").value.trim();
+
+  if(!activity){ alert("Please select an activity."); return; }
+  if(!question){ alert("Please type a question."); return; }
+
+  QUERIES.unshift({
+    id: Date.now(),
+    activity: activity,
+    question: question,
+    replies: []
+  });
+
+  saveStorageData();
+  document.getElementById("query-input").value = "";
+  renderQueries();
+}
+
+function submitReply(queryId){
+  const replyInput = document.getElementById(`reply-input-${queryId}`);
+  const text = replyInput.value.trim();
+  if(!text){ alert("Please enter a reply."); return; }
+
+  const q = QUERIES.find(item => item.id === queryId);
+  if(q){
+    q.replies.push(text);
+    saveStorageData();
+    renderQueries();
+  }
+}
+
+function renderQueries(){
+  const feed = document.getElementById("queries-feed");
+  if(QUERIES.length === 0){
+    feed.innerHTML = `<div class="tip-empty">No community queries posted yet. Feel free to ask the first question above!</div>`;
+    return;
+  }
+
+  feed.innerHTML = QUERIES.map(q => {
+    const repliesHtml = q.replies.map(r => `<div class="reply-item"><b>Senior Reply:</b> ${r}</div>`).join("");
+    return `
+      <div class="query-card">
+        <div class="query-header">
+          <span class="query-activity">${q.activity}</span>
+        </div>
+        <div class="query-question">❓ ${q.question}</div>
+        <div class="replies-list">
+          ${repliesHtml.length > 0 ? repliesHtml : `<div style="font-size:0.82rem; color:var(--ink-soft); font-style:italic;">No senior replies yet.</div>`}
+        </div>
+        <div class="reply-form">
+          <input type="text" id="reply-input-${q.id}" placeholder="Are you a senior? Leave a helpful reply..." />
+          <button type="button" onclick="submitReply(${q.id})">Reply</button>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+/* Global Activity Search Filter */
+function filterActivities() {
+  const query = document.getElementById("global-search").value.toLowerCase();
+  document.querySelectorAll(".chip").forEach(chip => {
+    const text = chip.dataset.name.toLowerCase();
+    if(text.includes(query)) {
+      chip.style.display = "inline-flex";
+    } else {
+      chip.style.display = "none";
+    }
+  });
+}
+
+/* Assistant Chatbot Widget */
+function toggleBotWindow() {
+  const win = document.getElementById("bot-window");
+  win.classList.toggle("open");
+}
+function handleBotKeyPress(e) { if(e.key === 'Enter') sendBotMessage(); }
+
+function sendBotMessage() {
+  const input = document.getElementById("bot-input");
+  const text = input.value.trim();
+  if(!text) return;
+
+  const msgs = document.getElementById("bot-msgs");
+  msgs.innerHTML += `<div class="chat-msg user">${text}</div>`;
+  input.value = "";
+  msgs.scrollTop = msgs.scrollHeight;
+
+  setTimeout(() => {
+    let botAns = "Coordinators expect regular attendance across all Panchmukhi activities. Check individual chip reviews for specific senior advice!";
+    const q = text.toLowerCase();
+
+    if(q.includes("strict") || q.includes("mam") || q.includes("ma'am") || q.includes("teacher")) {
+      botAns = "Faculty strictness varies: Group 1 (Dance/Music) and NSS/NCC monitor attendance very strictly at 5:00 PM. Group 2 Aerobics and Group 3 Design labs tend to be more project-flexible.";
+    } else if(q.includes("leave") || q.includes("absent") || q.includes("chutti")) {
+      botAns = "Leave Rule: For exam or medical leaves, inform your departmental coordinator 3 days prior. Medical certificates are accepted at Gyan/Sur Mandir offices.";
+    } else if(q.includes("timing") || q.includes("time") || q.includes("when")) {
+      botAns = "Timings: Aesthetic activities run 5:00–6:00 PM (Sur Mandir). Aerobics runs 12:00–1:00 PM (Gyan Mandir). Sports at Vidula Maidan run 6:00–8:00 AM & 5:00–8:00 PM.";
+    } else if(q.includes("credit") || q.includes("grade") || q.includes("marks")) {
+      botAns = "Moral Education = 1 Credit (Compulsory). Your best activity from Group 1, 2, or 3 earns 1 credit, and the second selected activity is graded only!";
+    }
+
+    msgs.innerHTML += `<div class="chat-msg bot">${botAns}</div>`;
+    msgs.scrollTop = msgs.scrollHeight;
+  }, 400);
+}
+
+/* Update Quick Metric Cards */
+function updateMetrics() {
+  document.getElementById("stat-activities").innerText = ALL_ACTIVITIES.length;
+  document.getElementById("stat-submissions").innerText = REGISTRATIONS.length;
+  
+  let totalTips = 0;
+  Object.keys(TIPS).forEach(k => totalTips += (TIPS[k] || []).length);
+  document.getElementById("stat-tips").innerText = totalTips;
+  document.getElementById("stat-queries").innerText = QUERIES.length;
+}
+
+// Initializer
+(function init(){
+  loadStorageData();
+  renderGroups();
+  renderOptions();
+  renderWall();
+  renderQueries();
+  renderAuditTable();
+  updateMetrics();
+})();
+</script>
+</body>
+</html>
