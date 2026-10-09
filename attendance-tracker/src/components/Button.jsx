@@ -1,10 +1,10 @@
 const variants = {
-  primary: 'bg-cobalt-500 text-white hover:bg-cobalt-600 active:scale-[0.98]',
-  ghost: 'bg-transparent text-ink dark:text-paper hover:bg-ink/5 dark:hover:bg-white/10',
-  outline: 'bg-transparent border border-ink/15 dark:border-white/15 text-ink dark:text-paper hover:bg-ink/5 dark:hover:bg-white/10',
-  danger: 'bg-crit text-white hover:opacity-90',
-  safe: 'bg-safe text-white hover:opacity-90',
-  warn: 'bg-warn text-white hover:opacity-90',
+  primary: 'bg-maroon text-white shadow-sm hover:bg-maroon-deep hover:shadow-card active:scale-[0.98]',
+  ghost: 'bg-transparent text-ink dark:text-paper hover:bg-paper dark:hover:bg-white/10',
+  outline: 'bg-white border border-line text-ink dark:text-paper hover:border-maroon/35 hover:bg-paper-card dark:hover:bg-white/10',
+  danger: 'bg-crit text-white shadow-sm hover:bg-maroon-deep hover:shadow-card',
+  safe: 'bg-safe text-white shadow-sm hover:opacity-90 hover:shadow-card',
+  warn: 'bg-warn text-ink shadow-sm hover:opacity-90 hover:shadow-card',
 };
 
 const sizes = {
@@ -16,7 +16,7 @@ const sizes = {
 export default function Button({ variant = 'primary', size = 'md', className = '', children, ...props }) {
   return (
     <button
-      className={`inline-flex items-center justify-center gap-1.5 rounded-xl font-medium transition-all duration-150 disabled:opacity-40 disabled:pointer-events-none ${variants[variant]} ${sizes[size]} ${className}`}
+      className={`inline-flex items-center justify-center gap-1.5 rounded-control font-semibold transition-all duration-150 hover:-translate-y-0.5 disabled:translate-y-0 disabled:opacity-40 disabled:pointer-events-none ${variants[variant]} ${sizes[size]} ${className}`}
       {...props}
     >
       {children}

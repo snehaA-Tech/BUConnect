@@ -1,10 +1,15 @@
 import React, { useState } from "react";
+import CompanyBoard from "./CompanyBoard";
+import Dashboard from "./Dashboard";
+import AttendancePage from "./AttendancePage";
+import FiveFoldPage from "./FiveFoldPage";
 
 function App() {
   const [role, setRole] = useState("user");
   const [showPassword, setShowPassword] = useState(false);
   const [signedIn, setSignedIn] = useState(false);
   const [form, setForm] = useState({ email: "", adminId: "", department: "", password: "" });
+  const [selectedModule, setSelectedModule] = useState("");
 
   const updateField = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value });
@@ -15,19 +20,35 @@ function App() {
     setSignedIn(true);
   };
 
-  if (signedIn) {
-    return (
-      <main style={styles.successPage}>
-        <div style={styles.successCard}>
-          <div style={styles.successIcon}>✓</div>
-          <p style={styles.eyebrow}>BU CONNECT</p>
-          <h1 style={styles.successTitle}>You are signed in.</h1>
-          <p style={styles.successText}>Welcome to the Banasthali community portal.</p>
-          <button style={styles.outlineButton} onClick={() => setSignedIn(false)}>Sign out</button>
-        </div>
-      </main>
-    );
-  }
+ if (signedIn) {
+
+  if (selectedModule === "attendance") {
+  return (
+    <AttendancePage
+      onBack={() => setSelectedModule("")}
+    />
+  );
+}
+
+if (selectedModule === "fivefold") {
+  return (
+    <FiveFoldPage
+      onBack={() => setSelectedModule("")}
+    />
+  );
+}
+
+  if (selectedModule === "placement") {
+  return (
+    <CompanyBoard
+      onBack={() => setSelectedModule("")}
+      currentRole={role === "admin" ? "admin" : "student"}
+    />
+  );
+}
+
+  return <Dashboard onSelect={setSelectedModule} />;
+}
 
   return (
     <main style={styles.page}>
@@ -93,18 +114,18 @@ function App() {
 }
 
 const styles = {
-  page: { minHeight: "100vh", display: "grid", gridTemplateColumns: "minmax(360px, 48%) 1fr", fontFamily: "Arial, sans-serif", background: "#fffdf8", color: "#16293b" },
+  page: { minHeight: "100vh", display: "grid", gridTemplateColumns: "minmax(360px, 48%) 1fr", fontFamily: "Inter, sans-serif", background: "#fffdf8", color: "#16293b" },
   brandPanel: { background: "#102940", color: "white", padding: "48px clamp(36px, 7vw, 105px)", display: "flex", flexDirection: "column", minHeight: "100vh" },
   logo: { fontSize: 13, letterSpacing: 2, fontWeight: 700, display: "flex", alignItems: "center", gap: 11 },
   logoMark: { width: 37, height: 37, border: "1px solid #e8b64b", color: "#e8b64b", borderRadius: "50%", display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: 12, letterSpacing: 0 },
   hero: { margin: "auto 0", maxWidth: 500 },
   eyebrow: { color: "#c99328", fontSize: 11, letterSpacing: 2, fontWeight: 700, margin: "0 0 15px" },
-  heroTitle: { fontFamily: "Georgia, serif", fontSize: "clamp(42px, 5vw, 72px)", lineHeight: 1.08, letterSpacing: -2, margin: "0 0 23px" },
+  heroTitle: { fontFamily: "Inter, sans-serif", fontSize: "clamp(42px, 5vw, 72px)", lineHeight: 1.08, letterSpacing: -2, margin: "0 0 23px" },
   heroText: { color: "#c4d0d7", maxWidth: 400, fontSize: 16, lineHeight: 1.7 },
   quote: { borderLeft: "2px solid #e8b64b", paddingLeft: 17, color: "#d3dde2", maxWidth: 390, fontSize: 14, lineHeight: 1.65 },
   loginPanel: { display: "grid", placeItems: "center", padding: "45px 28px", background: "#fffdf9" },
   card: { width: "min(100%, 430px)" },
-  title: { fontFamily: "Georgia, serif", fontSize: 35, margin: "0", letterSpacing: -1.2, color: "#102940" },
+  title: { fontFamily: "Inter, sans-serif", fontSize: 35, margin: "0", letterSpacing: -1.2, color: "#102940" },
   subtitle: { color: "#71808c", margin: "10px 0 29px" },
   tabs: { display: "grid", gridTemplateColumns: "1fr 1fr", padding: 4, borderRadius: 10, background: "#e9eeec", marginBottom: 26 },
   tab: { border: 0, borderRadius: 7, padding: "11px", background: "transparent", color: "#71808c", fontWeight: 700, cursor: "pointer" },
@@ -118,10 +139,10 @@ const styles = {
   link: { color: "#936b15", fontWeight: 700, textDecoration: "none" },
   submit: { width: "100%", padding: 15, border: 0, borderRadius: 8, color: "white", background: "#102940", fontSize: 15, fontWeight: 700, cursor: "pointer" },
   support: { textAlign: "center", fontSize: 12, color: "#71808c", marginTop: 27 },
-  successPage: { minHeight: "100vh", display: "grid", placeItems: "center", background: "#f4f7f6", fontFamily: "Arial, sans-serif" },
+  successPage: { minHeight: "100vh", display: "grid", placeItems: "center", background: "#f4f7f6", fontFamily: "Inter, sans-serif" },
   successCard: { background: "white", padding: 44, borderRadius: 16, textAlign: "center", boxShadow: "0 10px 35px rgba(16,41,64,.12)", maxWidth: 390 },
   successIcon: { margin: "0 auto 16px", width: 52, height: 52, borderRadius: "50%", display: "grid", placeItems: "center", background: "#e3f0e7", color: "#21703b", fontSize: 28 },
-  successTitle: { color: "#102940", fontFamily: "Georgia, serif", fontSize: 32, margin: "0 0 10px" },
+  successTitle: { color: "#102940", fontFamily: "Inter, sans-serif", fontSize: 32, margin: "0 0 10px" },
   successText: { color: "#71808c", lineHeight: 1.6 },
   outlineButton: { marginTop: 15, border: "1px solid #102940", borderRadius: 7, background: "white", color: "#102940", padding: "10px 18px", cursor: "pointer", fontWeight: 700 }
 };

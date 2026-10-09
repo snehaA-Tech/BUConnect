@@ -2,7 +2,174 @@
   box-sizing: border-box;
 }
 
+:root {
+  --font-ui: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --color-ivory: #FBF5E9;
+  --color-paper: #F4EBD8;
+  --color-paper-card: #FAF2E3;
+  --color-maroon: #7A1F3D;
+  --color-maroon-deep: #5A1530;
+  --color-gold: #C1902E;
+  --color-gold-soft: #E5C378;
+  --color-teal: #1F6F5C;
+  --color-teal-deep: #154D40;
+  --color-ink: #2B1B1F;
+  --color-ink-soft: #5B4A4E;
+  --color-line: #DECEB0;
+  --color-white: #FFFFFF;
+  --color-status-pending: #C1902E;
+  --color-status-in-progress: #1F6F5C;
+  --color-status-resolved: #154D40;
+  --color-status-warning: #C1902E;
+  --color-status-danger: #7A1F3D;
+  --radius-control: 6px;
+  --radius-card: 8px;
+  --radius-panel: 12px;
+  --radius-pill: 20px;
+  --shadow-card: 0 10px 30px -5px rgba(43,27,31,0.08);
+  --shadow-hover: 0 15px 35px -5px rgba(122,31,61,0.15);
+  --space-control-x: 24px;
+  --space-control-y: 12px;
+  --font-size-button: 0.95rem;
+}
+
 body {
   margin: 0;
-  background-color: #f7f9fc;
+  background-color: var(--color-ivory);
+  font-family: var(--font-ui);
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+.app-back-row {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1080px;
+  margin: 12px auto;
+  padding: 0 24px;
+  flex: 0 0 auto;
+}
+
+.app-back-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-control-y) var(--space-control-x);
+  border: 1.5px solid var(--color-ink);
+  border-radius: var(--radius-control);
+  background: transparent;
+  color: var(--color-ink);
+  font-family: var(--font-ui);
+  font-size: var(--font-size-button);
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.app-back-button:hover {
+  background: var(--color-ink);
+  color: var(--color-ivory);
+}
+
+.app-back-button:focus-visible {
+  outline: 2px solid var(--color-teal);
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .app-back-row {
+    padding: 0 16px;
+  }
+}
+
+.company-board-header {
+  position: relative;
+}
+
+.company-board-header::after {
+  content: "";
+  display: block;
+  width: 54px;
+  height: 3px;
+  margin: 18px auto 0;
+  border-radius: 2px;
+  background: var(--color-gold);
+}
+
+.company-board-grid > .company-board-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.company-board-grid > .company-board-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: var(--color-teal);
+}
+
+.company-board-grid > .company-board-card:nth-child(3n + 1)::before {
+  background: var(--color-maroon);
+}
+
+.company-board-grid > .company-board-card:nth-child(3n)::before {
+  background: var(--color-gold);
+}
+
+.company-board-grid > .company-board-card:nth-child(3n + 1) .companyBadge {
+  color: var(--color-maroon);
+}
+
+.company-board-grid > .company-board-card:nth-child(3n) .companyBadge {
+  color: var(--color-maroon-deep);
+}
+
+.company-board-grid > .company-board-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-gold);
+  box-shadow: var(--shadow-hover);
+}
+
+.query-board-card {
+  border: 1px solid var(--color-line);
+  border-top: 3px solid var(--color-maroon);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.query-board-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-gold);
+  box-shadow: var(--shadow-hover);
+}
+
+.query-board-reply {
+  border-left: 3px solid var(--color-teal) !important;
+}
+
+.query-board-section button:not(:disabled) {
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+.query-board-section button:not(:disabled):hover {
+  filter: brightness(0.94);
+  transform: translateY(-1px);
+}
+
+.query-board-section button:focus-visible,
+.company-board-shell input:focus-visible,
+.company-board-shell select:focus-visible {
+  outline: 2px solid var(--color-teal);
+  outline-offset: 2px;
 }

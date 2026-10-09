@@ -203,7 +203,7 @@ function samePerson(name1, name2) {
   );
 }
 
-function QueryBoard() {
+function QueryBoard({ currentRole }) {
   const [queries, setQueries] = useState(initialQueries);
 
   const [title, setTitle] = useState("");
@@ -212,9 +212,6 @@ function QueryBoard() {
   // Temporary until real login is connected
   const [currentStudentName, setCurrentStudentName] =
     useState("");
-
-  const [currentRole, setCurrentRole] =
-    useState("student");
 
   const [message, setMessage] = useState("");
   const showMessage = (text) => {
@@ -377,7 +374,7 @@ function QueryBoard() {
           `You have already posted this query: "${bestDuplicate.title}".`
         );
       } else if (alreadySupported) {
-        showMessageMessage(
+        showMessage(
           `You have already supported this query: "${bestDuplicate.title}".`
         );
       } else {
@@ -689,48 +686,9 @@ function QueryBoard() {
   };
 
   return (
-    <div style={styles.section}>
-
+    <div className="query-board-section" style={styles.section}>
       <div style={styles.topBar}>
-        <h1 style={styles.heading}>
-          Placement Query Board
-        </h1>
-
-        <div style={styles.roleBox}>
-          <span style={styles.roleText}>
-            Viewing as:
-          </span>
-
-          <button
-            type="button"
-            style={
-              currentRole === "student"
-                ? styles.activeRoleButton
-                : styles.roleButton
-            }
-            onClick={() => {
-              setCurrentRole("student");
-              showMessage("");
-            }}
-          >
-            Student
-          </button>
-
-          <button
-            type="button"
-            style={
-              currentRole === "admin"
-                ? styles.activeRoleButton
-                : styles.roleButton
-            }
-            onClick={() => {
-              setCurrentRole("admin");
-              setMessage("");
-            }}
-          >
-            Admin
-          </button>
-        </div>
+        <h1 style={styles.heading}>Placement Query Board</h1>
       </div>
 
       <p style={styles.roleInfo}>
@@ -744,51 +702,31 @@ function QueryBoard() {
           type="text"
           placeholder="Your name (temporary testing)"
           value={currentStudentName}
-          onChange={(e) =>
-            setCurrentStudentName(
-              e.target.value
-            )
-          }
+          onChange={(e) => setCurrentStudentName(e.target.value)}
           style={styles.studentNameInput}
         />
       )}
 
-      {message && (
-  <div style={styles.toast}>
-    {message}
-  </div>
-)}
+      {message && <div style={styles.toast}>{message}</div>}
 
       {currentRole === "student" && (
-        <form
-          onSubmit={handleSubmit}
-          style={styles.form}
-        >
+        <form onSubmit={handleSubmit} style={styles.form}>
           <input
             type="text"
             placeholder="Issue title"
             value={title}
-            onChange={(e) =>
-              setTitle(e.target.value)
-            }
+            onChange={(e) => setTitle(e.target.value)}
             style={styles.input}
           />
 
           <textarea
             placeholder="Describe the issue"
             value={description}
-            onChange={(e) =>
-              setDescription(
-                e.target.value
-              )
-            }
+            onChange={(e) => setDescription(e.target.value)}
             style={styles.textarea}
           />
 
-          <button
-            type="submit"
-            style={styles.button}
-          >
+          <button type="submit" style={styles.button}>
             Post Query
           </button>
         </form>
@@ -796,226 +734,106 @@ function QueryBoard() {
 
       <div style={styles.queryList}>
         {sortedQueries.map((query) => {
-          const replies =
-            query.replies || [];
-
+          const replies = query.replies || [];
           const ownQuery = isOwner(query);
-
           const participant = isParticipant(query);
-
-          const alreadyUpvoted =
-            (query.upvotedBy || []).some(
-              (name) =>
-                samePerson(
-                  name,
-                  currentStudentName
-                )
-            );
+          const alreadyUpvoted = (query.upvotedBy || []).some((name) => samePerson(name, currentStudentName));
 
           return (
-            <div
-              key={query._id}
-              style={styles.queryCard}
-            >
+            <div key={query._id} className="query-board-card" style={styles.queryCard}>
               <div style={styles.queryHeader}>
-                <h3 style={styles.queryTitle}>
-                  {query.title}
-                </h3>
+                <div style={styles.titleBlock}>
+                  <span style={styles.issueLabel}>Issue</span>
+                  <h3 style={styles.queryTitle}>{query.title}</h3>
+                </div>
 
-                <span
-                  style={statusBadgeStyle(
-                    query.status
-                  )}
-                >
-                  {query.status}
-                </span>
+                <span style={statusBadgeStyle(query.status)}>{query.status}</span>
               </div>
 
-              {query.description && (
-                <p style={styles.description}>
-                  {query.description}
-                </p>
-              )}
+              {query.description && <p style={styles.description}>{query.description}</p>}
 
               <div style={styles.priorityRow}>
-                <p style={styles.meta}>
-                  Posted by {query.postedBy}
-                  {" • "}
-                  Priority:{" "}
-                  {query.priorityScore}
-                </p>
+                <p style={styles.meta}>Posted by {query.postedBy}</p>
+                <span style={styles.dotDivider}>•</span>
+                <p style={styles.meta}>Priority: {query.priorityScore}</p>
 
-                {currentRole === "student" &&
-                  query.status !==
-                    "resolved" && (
-                    <button
-                      type="button"
-                      onClick={() =>
-                        increasePriority(
-                          query._id
-                        )
-                      }
-                      disabled={
-                        ownQuery ||
-                        alreadyUpvoted
-                      }
-                      style={
-                        ownQuery ||
-                        alreadyUpvoted
-                          ? styles.disabledPlusButton
-                          : styles.plusButton
-                      }
-                      title={
-                        ownQuery
-                          ? "Your own query"
-                          : alreadyUpvoted
-                          ? "Already supported"
-                          : "I have the same problem"
-                      }
-                    >
-                      +
-                    </button>
-                  )}
+                {currentRole === "student" && query.status !== "resolved" && (
+                  <button
+                    type="button"
+                    onClick={() => increasePriority(query._id)}
+                    disabled={ownQuery || alreadyUpvoted}
+                    style={ownQuery || alreadyUpvoted ? styles.disabledPlusButton : styles.plusButton}
+                    title={
+                      ownQuery
+                        ? "Your own query"
+                        : alreadyUpvoted
+                        ? "Already supported"
+                        : "I have the same problem"
+                    }
+                  >
+                    +
+                  </button>
+                )}
               </div>
 
               {replies.length > 0 && (
                 <div style={styles.repliesBox}>
-                  <strong>Replies</strong>
+                  <strong style={styles.repliesTitle}>Replies</strong>
 
                   {replies.map((reply) => (
-                    <div
-                      key={reply.id}
-                      style={styles.reply}
-                    >
-                      <div
-                        style={
-                          styles.replyHeader
-                        }
-                      >
-                        <strong>
-                          {reply.repliedBy}
-                        </strong>
-
-                        <span
-                          style={
-                            reply.role ===
-                            "admin"
-                              ? styles.adminBadge
-                              : styles.studentBadge
-                          }
-                        >
-                          {reply.role}
-                        </span>
+                    <div key={reply.id} className="query-board-reply" style={styles.reply}>
+                      <div style={styles.replyHeader}>
+                        <strong>{reply.repliedBy}</strong>
+                        <span style={reply.role === "admin" ? styles.adminBadge : styles.studentBadge}>{reply.role}</span>
                       </div>
 
-                      <div>
-                        {reply.text}
-                      </div>
+                      <div>{reply.text}</div>
                     </div>
                   ))}
                 </div>
               )}
 
               <div style={styles.replyForm}>
-  <input
-    type="text"
-    placeholder="Write a reply..."
-    value={
-      replyInputs[query._id] || ""
-    }
-    onChange={(e) =>
-      setReplyInputs((previous) => ({
-        ...previous,
-        [query._id]: e.target.value,
-      }))
-    }
-    style={styles.replyInput}
-  />
+                <input
+                  type="text"
+                  placeholder="Write a reply..."
+                  value={replyInputs[query._id] || ""}
+                  onChange={(e) =>
+                    setReplyInputs((previous) => ({
+                      ...previous,
+                      [query._id]: e.target.value,
+                    }))
+                  }
+                  style={styles.replyInput}
+                />
 
-  <button
-    type="button"
-    onClick={() =>
-      addReply(query._id)
-    }
-    style={styles.replyButton}
-  >
-    Reply
-  </button>
+                <button type="button" onClick={() => addReply(query._id)} style={styles.replyButton}>
+                  Reply
+                </button>
 
-  {query.status !== "resolved" &&
-    (
-      currentRole === "admin" ||
-      ownQuery
-    ) && (
-      <button
-        type="button"
-        onClick={() =>
-          markResolved(query._id)
-        }
-        style={styles.solvedButton}
-      >
-        ✓ {currentRole === "admin"
-          ? "Resolve"
-          : "Solved"}
-      </button>
-    )}
-</div>
-{currentRole === "student" &&
-  query.status === "resolved" &&
-  participant && (
-    <button
-      type="button"
-      onClick={() =>
-        stillFacingIssue(query._id)
-      }
-      style={styles.stillFacingButton}
-    >
-      Still facing issue
-    </button>
-  )}
+                {query.status !== "resolved" && (currentRole === "admin" || ownQuery) && (
+                  <button type="button" onClick={() => markResolved(query._id)} style={styles.solvedButton}>
+                    ✓ {currentRole === "admin" ? "Resolve" : "Solved"}
+                  </button>
+                )}
+              </div>
 
+              {currentRole === "student" && query.status === "resolved" && participant && (
+                <button type="button" onClick={() => stillFacingIssue(query._id)} style={styles.stillFacingButton}>
+                  Still facing issue
+                </button>
+              )}
 
               <div style={styles.actions}>
-                {currentRole === "admin" &&
-                  query.status ===
-                    "pending" && (
-                    <button
-                      type="button"
-                      onClick={() =>
-                        markInProgress(
-                          query._id
-                        )
-                      }
-                      style={
-                        styles.progressButton
-                      }
-                    >
-                      Start Progress
-                    </button>
-                  )}
-
-              
+                {currentRole === "admin" && query.status === "pending" && (
+                  <button type="button" onClick={() => markInProgress(query._id)} style={styles.progressButton}>
+                    Start Progress
+                  </button>
+                )}
 
                 {(currentRole === "admin" ||
-                  (
-                    currentRole ===
-                      "student" &&
-                    ownQuery &&
-                    query.status ===
-                      "pending" &&
-                    query.priorityScore ===
-                      1 &&
-                    replies.length === 0
-                  )) && (
-                  <button
-                    type="button"
-                    onClick={() =>
-                      deleteQuery(query._id)
-                    }
-                    style={
-                      styles.deleteButton
-                    }
-                  >
+                  (currentRole === "student" && ownQuery && query.status === "pending" && query.priorityScore === 1 && replies.length === 0)) && (
+                  <button type="button" onClick={() => deleteQuery(query._id)} style={styles.deleteButton}>
                     Delete
                   </button>
                 )}
@@ -1030,10 +848,11 @@ function QueryBoard() {
 
 function statusBadgeStyle(status) {
   const base = {
-    padding: "4px 10px",
-    borderRadius: "12px",
-    fontSize: "12px",
-    fontWeight: "bold",
+    padding: "6px 10px",
+    borderRadius: "999px",
+    fontSize: "11px",
+    fontWeight: "700",
+    letterSpacing: "0.04em",
     textTransform: "capitalize",
     whiteSpace: "nowrap",
   };
@@ -1041,70 +860,72 @@ function statusBadgeStyle(status) {
   if (status === "resolved") {
     return {
       ...base,
-      background: "#e6f4ea",
-      color: "#1b5e20",
+      background: "#EAF5F2",
+      color: "var(--color-teal-deep)",
+      border: "1px solid #B8E2D8",
     };
   }
 
   if (status === "in-progress") {
     return {
       ...base,
-      background: "#fff8e1",
-      color: "#e65100",
+      background: "#F4EBD8",
+      color: "var(--color-teal-deep)",
+      border: "1px solid var(--color-gold-soft)",
     };
   }
 
   return {
     ...base,
-    background: "#fdecea",
-    color: "#c62828",
+    background: "var(--color-paper-card)",
+    color: "var(--color-maroon-deep)",
+    border: "1px solid var(--color-gold-soft)",
   };
 }
 
 const styles = {
-
   solvedButton: {
-  padding: "8px 14px",
-  borderRadius: "6px",
-  border: "none",
-  background: "#1b5e20",
-  color: "white",
-  cursor: "pointer",
-  fontWeight: "bold",
-  whiteSpace: "nowrap",
-},
+    padding: "9px 14px",
+    borderRadius: "var(--radius-control)",
+    border: "none",
+    background: "var(--color-teal)",
+    color: "white",
+    cursor: "pointer",
+    fontWeight: "700",
+    whiteSpace: "nowrap",
+  },
 
-stillFacingButton: {
-  marginTop: "12px",
-  padding: "8px 14px",
-  borderRadius: "6px",
-  border: "1px solid #e65100",
-  background: "#fff8e1",
-  color: "#e65100",
-  cursor: "pointer",
-  fontWeight: "bold",
-},
+  stillFacingButton: {
+    marginTop: "12px",
+    padding: "9px 14px",
+    borderRadius: "var(--radius-control)",
+    border: "1px solid var(--color-gold)",
+    background: "var(--color-paper-card)",
+    color: "var(--color-maroon-deep)",
+    cursor: "pointer",
+    fontWeight: "700",
+  },
 
   toast: {
-  position: "fixed",
-  top: "20px",
-  right: "20px",
-  background: "#16325c",
-  color: "white",
-  padding: "12px 18px",
-  borderRadius: "8px",
-  boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
-  fontSize: "14px",
-  fontWeight: "500",
-  zIndex: 9999,
-  maxWidth: "320px",
-},
+    position: "fixed",
+    top: "20px",
+    right: "20px",
+    background: "var(--color-maroon-deep)",
+    color: "white",
+    padding: "12px 18px",
+    borderRadius: "var(--radius-panel)",
+    boxShadow: "var(--shadow-hover)",
+    fontSize: "14px",
+    fontWeight: "600",
+    zIndex: 9999,
+    maxWidth: "320px",
+  },
 
   section: {
-    fontFamily: "Arial, sans-serif",
-    padding: "24px",
-    maxWidth: "850px",
-    margin: "40px auto 0",
+    fontFamily: "var(--font-ui)",
+    padding: "24px 18px 0",
+    maxWidth: "980px",
+    margin: "28px auto 0",
   },
 
   topBar: {
@@ -1116,178 +937,190 @@ stillFacingButton: {
   },
 
   heading: {
-    color: "#16325c",
+    color: "var(--color-maroon-deep)",
     margin: 0,
-  },
-
-  roleBox: {
-    display: "flex",
-    alignItems: "center",
-    gap: "7px",
-  },
-
-  roleText: {
-    fontSize: "13px",
-    color: "#555",
-  },
-
-  roleButton: {
-    padding: "7px 12px",
-    borderRadius: "6px",
-    border: "1px solid #16325c",
-    background: "white",
-    color: "#16325c",
-    cursor: "pointer",
-  },
-
-  activeRoleButton: {
-    padding: "7px 12px",
-    borderRadius: "6px",
-    border: "1px solid #16325c",
-    background: "#16325c",
-    color: "white",
-    cursor: "pointer",
-    fontWeight: "bold",
+    fontSize: "32px",
+    letterSpacing: "-0.8px",
   },
 
   roleInfo: {
     fontSize: "13px",
-    color: "#666",
+    color: "var(--color-ink-soft)",
     marginTop: "10px",
-    marginBottom: "12px",
+    marginBottom: "14px",
+    lineHeight: 1.6,
   },
 
   studentNameInput: {
     width: "100%",
     boxSizing: "border-box",
-    padding: "9px 12px",
-    borderRadius: "6px",
-    border: "1px solid #ccc",
-    marginBottom: "12px",
-  },
-
-  message: {
-    padding: "10px 12px",
-    marginBottom: "16px",
-    borderRadius: "6px",
-    background: "#fff8d8",
-    border: "1px solid #e6c94c",
-    color: "#665000",
-    fontSize: "14px",
+    padding: "11px 12px",
+    borderRadius: "var(--radius-control)",
+    border: "1px solid var(--color-line)",
+    background: "var(--color-white)",
+    color: "var(--color-ink)",
+    marginBottom: "14px",
+    boxShadow: "0 4px 10px rgba(16, 41, 64, 0.03)",
   },
 
   form: {
     display: "flex",
     flexDirection: "column",
-    gap: "10px",
-    marginBottom: "25px",
+    gap: "12px",
+    marginBottom: "26px",
+    background: "var(--color-paper-card)",
+    border: "1px solid var(--color-line)",
+    borderTop: "3px solid var(--color-gold)",
+    borderRadius: "var(--radius-panel)",
+    padding: "18px",
+    boxShadow: "var(--shadow-card)",
   },
 
   input: {
-    padding: "9px 12px",
-    borderRadius: "6px",
-    border: "1px solid #ccc",
+    padding: "11px 12px",
+    borderRadius: "var(--radius-control)",
+    border: "1px solid var(--color-line)",
+    background: "var(--color-white)",
+    color: "var(--color-ink)",
   },
 
   textarea: {
-    padding: "9px 12px",
-    borderRadius: "6px",
-    border: "1px solid #ccc",
-    minHeight: "70px",
+    padding: "11px 12px",
+    borderRadius: "var(--radius-control)",
+    border: "1px solid var(--color-line)",
+    minHeight: "90px",
     resize: "vertical",
+    background: "var(--color-white)",
+    color: "var(--color-ink)",
   },
 
   button: {
-    padding: "10px",
-    borderRadius: "6px",
+    padding: "11px 16px",
+    borderRadius: "var(--radius-control)",
     border: "none",
-    background: "#16325c",
+    background: "var(--color-maroon)",
     color: "white",
     cursor: "pointer",
-    fontWeight: "bold",
+    fontWeight: "700",
+    boxShadow: "0 4px 14px rgba(122,31,61,0.25)",
   },
 
   queryList: {
     display: "flex",
     flexDirection: "column",
-    gap: "12px",
+    gap: "16px",
   },
 
   queryCard: {
-    border: "1px solid #ddd",
-    borderRadius: "10px",
-    padding: "14px",
-    boxShadow:
-      "0 2px 6px rgba(0,0,0,0.06)",
-    background: "white",
+    borderRadius: "var(--radius-card)",
+    padding: "18px 18px 16px",
+    background: "var(--color-white)",
   },
 
   queryHeader: {
     display: "flex",
     justifyContent: "space-between",
-    alignItems: "center",
-    gap: "10px",
+    alignItems: "flex-start",
+    gap: "12px",
+    marginBottom: "8px",
+  },
+
+  titleBlock: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "6px",
+  },
+
+  issueLabel: {
+    fontSize: "10px",
+    letterSpacing: "0.12em",
+    textTransform: "uppercase",
+    color: "var(--color-teal-deep)",
+    fontWeight: "700",
   },
 
   queryTitle: {
     margin: 0,
-    color: "#0f4d2e",
+    color: "var(--color-maroon-deep)",
+    fontSize: "24px",
+    lineHeight: 1.2,
   },
 
   description: {
     fontSize: "14px",
-    color: "#444",
+    color: "var(--color-ink-soft)",
+    lineHeight: 1.7,
+    margin: "10px 0 12px",
   },
 
   meta: {
     fontSize: "12px",
-    color: "#888",
+    color: "var(--color-ink-soft)",
     margin: 0,
+  },
+
+  dotDivider: {
+    color: "var(--color-gold)",
+    fontSize: "12px",
+    margin: "0 4px",
   },
 
   priorityRow: {
     display: "flex",
     alignItems: "center",
-    gap: "10px",
+    flexWrap: "wrap",
+    gap: "8px",
     marginTop: "8px",
   },
 
   plusButton: {
-    width: "28px",
-    height: "28px",
+    width: "32px",
+    height: "32px",
     borderRadius: "50%",
-    border: "1px solid #16325c",
-    background: "#16325c",
+    border: "1px solid var(--color-maroon-deep)",
+    background: "var(--color-maroon)",
     color: "white",
     cursor: "pointer",
     fontSize: "18px",
     lineHeight: "20px",
-    fontWeight: "bold",
+    fontWeight: "700",
+    marginLeft: "8px",
   },
 
   disabledPlusButton: {
-    width: "28px",
-    height: "28px",
+    width: "32px",
+    height: "32px",
     borderRadius: "50%",
-    border: "1px solid #bbb",
-    background: "#eee",
-    color: "#999",
+    border: "1px solid var(--color-line)",
+    background: "var(--color-paper)",
+    color: "var(--color-ink-soft)",
     cursor: "not-allowed",
     fontSize: "18px",
+    marginLeft: "8px",
   },
 
   repliesBox: {
-    marginTop: "16px",
-    paddingTop: "12px",
-    borderTop: "1px solid #eee",
+    marginTop: "18px",
+    paddingTop: "14px",
+    borderTop: "1px solid var(--color-line)",
+  },
+
+  repliesTitle: {
+    color: "var(--color-maroon-deep)",
+    fontSize: "13px",
+    letterSpacing: "0.08em",
+    textTransform: "uppercase",
   },
 
   reply: {
-    background: "#f7f8fa",
-    borderRadius: "7px",
-    padding: "9px",
-    marginTop: "8px",
+    background: "var(--color-paper-card)",
+    border: "1px solid var(--color-line)",
+    borderRadius: "var(--radius-control)",
+    padding: "10px 12px",
+    marginTop: "10px",
     fontSize: "13px",
+    color: "var(--color-ink-soft)",
+    lineHeight: 1.6,
   },
 
   replyHeader: {
@@ -1295,46 +1128,54 @@ stillFacingButton: {
     gap: "7px",
     alignItems: "center",
     marginBottom: "5px",
+    color: "var(--color-maroon-deep)",
   },
 
   adminBadge: {
     fontSize: "10px",
-    padding: "2px 6px",
-    borderRadius: "10px",
-    background: "#16325c",
+    padding: "4px 8px",
+    borderRadius: "999px",
+    background: "var(--color-maroon-deep)",
     color: "white",
     textTransform: "capitalize",
+    fontWeight: "700",
   },
 
   studentBadge: {
     fontSize: "10px",
-    padding: "2px 6px",
-    borderRadius: "10px",
-    background: "#e6f4ea",
-    color: "#1b5e20",
+    padding: "4px 8px",
+    borderRadius: "999px",
+    background: "#EAF5F2",
+    color: "var(--color-teal-deep)",
     textTransform: "capitalize",
+    fontWeight: "700",
   },
 
   replyForm: {
     display: "flex",
     gap: "8px",
-    marginTop: "12px",
+    marginTop: "16px",
+    flexWrap: "wrap",
   },
 
   replyInput: {
     flex: 1,
-    padding: "8px 10px",
-    borderRadius: "6px",
-    border: "1px solid #ccc",
+    minWidth: "180px",
+    padding: "10px 12px",
+    borderRadius: "var(--radius-control)",
+    border: "1px solid var(--color-line)",
+    background: "var(--color-white)",
+    color: "var(--color-ink)",
   },
 
   replyButton: {
-    padding: "8px 14px",
-    borderRadius: "6px",
+    padding: "10px 14px",
+    borderRadius: "var(--radius-control)",
     border: "none",
-    background: "#0f4d2e",
+    background: "var(--color-maroon)",
     color: "white",
     cursor: "pointer",
+    fontWeight: "700",
   },
 
   actions: {
@@ -1345,33 +1186,23 @@ stillFacingButton: {
   },
 
   progressButton: {
-    padding: "7px 12px",
-    borderRadius: "6px",
-    border: "1px solid #e0a800",
-    background: "#fff8e1",
-    color: "#8a6500",
+    padding: "9px 12px",
+    borderRadius: "var(--radius-control)",
+    border: "1px solid var(--color-gold)",
+    background: "var(--color-paper-card)",
+    color: "var(--color-ink)",
     cursor: "pointer",
-    fontWeight: "bold",
-  },
-
-  resolveButton: {
-    padding: "7px 12px",
-    borderRadius: "6px",
-    border: "1px solid #16325c",
-    background: "white",
-    color: "#16325c",
-    cursor: "pointer",
-    fontWeight: "bold",
+    fontWeight: "700",
   },
 
   deleteButton: {
-    padding: "7px 12px",
-    borderRadius: "6px",
-    border: "1px solid #c62828",
-    background: "white",
-    color: "#c62828",
+    padding: "9px 12px",
+    borderRadius: "var(--radius-control)",
+    border: "1px solid var(--color-maroon)",
+    background: "#F0DCC7",
+    color: "var(--color-maroon-deep)",
     cursor: "pointer",
-    fontWeight: "bold",
+    fontWeight: "700",
   },
 };
 

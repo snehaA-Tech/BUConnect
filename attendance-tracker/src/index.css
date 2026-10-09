@@ -4,6 +4,31 @@
 
 :root {
   color-scheme: light;
+  --font-ui: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --color-ivory: #FBF5E9;
+  --color-paper: #F4EBD8;
+  --color-paper-card: #FAF2E3;
+  --color-maroon: #7A1F3D;
+  --color-maroon-deep: #5A1530;
+  --color-gold: #C1902E;
+  --color-gold-soft: #E5C378;
+  --color-teal: #1F6F5C;
+  --color-teal-deep: #154D40;
+  --color-ink: #2B1B1F;
+  --color-ink-soft: #5B4A4E;
+  --color-line: #DECEB0;
+  --color-white: #FFFFFF;
+  --color-status-pending: #C1902E;
+  --color-status-in-progress: #1F6F5C;
+  --color-status-resolved: #154D40;
+  --color-status-warning: #C1902E;
+  --color-status-danger: #7A1F3D;
+  --radius-control: 6px;
+  --radius-card: 8px;
+  --radius-panel: 12px;
+  --radius-pill: 20px;
+  --shadow-card: 0 10px 30px -5px rgba(43,27,31,0.08);
+  --shadow-hover: 0 15px 35px -5px rgba(122,31,61,0.15);
 }
 html.dark {
   color-scheme: dark;
@@ -15,6 +40,7 @@ html.dark {
 
 body {
   @apply bg-paper text-ink dark:bg-ink dark:text-paper transition-colors duration-200;
+  font-family: var(--font-ui);
 }
 
 ::selection {
@@ -27,7 +53,7 @@ body {
 
 /* Focus visibility */
 button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
-  outline: 2px solid #2D5BFF;
+  outline: 2px solid #1F6F5C;
   outline-offset: 2px;
 }
 
@@ -40,7 +66,17 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 }
 
 .card {
-  @apply bg-white dark:bg-ink-soft rounded-xl2 shadow-card border border-ink/5 dark:border-white/5;
+  @apply bg-paper-card dark:bg-ink-soft rounded-card shadow-card border border-line;
+}
+
+.attendance-class-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.attendance-class-card:hover {
+  transform: translateY(-2px);
+  border-color: #C1902E;
+  box-shadow: var(--shadow-hover);
 }
 
 .tick-rule {

@@ -7,7 +7,7 @@ import Button from '../components/Button';
 import ProgressRing from '../components/ProgressRing';
 
 export default function Profile() {
-  const { profile, updateProfile, logout } = useAuth();
+  const { profile, updateProfile } = useAuth();
   const { records, settings, subjects } = useApp();
   const [editing, setEditing] = useState(false);
   const [form, setForm] = useState(profile);
@@ -63,7 +63,7 @@ export default function Profile() {
         <Button variant="outline" onClick={() => setEditing(true)}>Edit profile</Button>
       )}
 
-      <Button variant="ghost" className="text-crit w-fit" onClick={logout}>Log out</Button>
+      
     </div>
   );
 }

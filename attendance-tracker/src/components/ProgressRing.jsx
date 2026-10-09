@@ -1,8 +1,8 @@
 const STATE_COLOR = {
-  safe: '#1B8A5A',
-  warn: '#C77D0A',
-  crit: '#C7402D',
-  none: '#6B6F7B',
+  safe: '#1F6F5C',
+  warn: '#C1902E',
+  crit: '#7A1F3D',
+  none: '#5B4A4E',
 };
 
 // A ring styled like a class-period clock face: 12 tick marks (periods), a sweeping

@@ -1,9 +1,9 @@
 const styles = {
-  safe: 'bg-safe-bg text-safe dark:bg-safe/15 dark:text-emerald-300',
-  warn: 'bg-warn-bg text-warn dark:bg-warn/15 dark:text-amber-300',
-  crit: 'bg-crit-bg text-crit dark:bg-crit/15 dark:text-red-300',
-  none: 'bg-ink/5 text-ink-muted dark:bg-white/10',
-  info: 'bg-cobalt-50 text-cobalt-600 dark:bg-cobalt-500/15 dark:text-cobalt-100',
+  safe: 'border border-teal/20 bg-safe-bg text-teal-deep dark:bg-safe/15 dark:text-emerald-300',
+  warn: 'border border-gold/30 bg-warn-bg text-ink dark:bg-warn/15 dark:text-amber-300',
+  crit: 'border border-maroon/20 bg-crit-bg text-maroon-deep dark:bg-crit/15 dark:text-red-300',
+  none: 'border border-line bg-paper text-ink-muted dark:bg-white/10',
+  info: 'border border-maroon/15 bg-[#F0DCC7] text-maroon-deep dark:bg-cobalt-500/15 dark:text-cobalt-100',
 };
 
 export default function Badge({ tone = 'none', children, className = '' }) {

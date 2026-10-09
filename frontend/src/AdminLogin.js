@@ -58,7 +58,7 @@ function AdminLogin({ onLoginSuccess }) {
 
 const styles = {
   wrapper: {
-    fontFamily: "Arial, sans-serif",
+    fontFamily: "Inter, sans-serif",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

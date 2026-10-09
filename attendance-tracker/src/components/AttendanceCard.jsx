@@ -43,15 +43,15 @@ export default function AttendanceCard({ subject, time, record, holiday, onMark,
   }
 
   return (
-    <div className="card p-4 flex flex-col gap-3">
+    <div className="card attendance-class-card relative flex flex-col gap-4 overflow-hidden border-l-4 border-l-teal p-5">
       <div className="flex items-start justify-between gap-3">
-        <div>
-          <p className="font-display font-semibold">{subject.name}</p>
-          <p className="text-xs text-ink-muted mt-0.5">
+        <div className="min-w-0">
+          <p className="font-display text-base font-bold text-maroon-deep">{subject.name}</p>
+          <p className="mt-1 text-xs leading-relaxed text-ink-muted">
             {time} · {subject.room} · {subject.teacher}
           </p>
         </div>
-        <span className="w-2.5 h-2.5 rounded-full mt-1 shrink-0" style={{ background: subject.color }} aria-hidden="true" />
+        <span className="mt-1 h-3 w-3 shrink-0 rounded-full ring-4 ring-paper" style={{ background: subject.color }} aria-hidden="true" />
       </div>
 
       {holiday ? (
@@ -62,6 +62,7 @@ export default function AttendanceCard({ subject, time, record, holiday, onMark,
             <Button
               size="sm"
               variant={currentStatus === 'present' ? 'safe' : 'outline'}
+              className={currentStatus === 'present' ? '' : 'border-teal/40 text-teal-deep hover:bg-safe-bg'}
               onClick={() => handlePick('present')}
             >
               Present
@@ -69,13 +70,15 @@ export default function AttendanceCard({ subject, time, record, holiday, onMark,
             <Button
               size="sm"
               variant={currentStatus === 'absent' ? 'danger' : 'outline'}
+              className={currentStatus === 'absent' ? '' : 'border-maroon/35 text-maroon-deep hover:bg-[#F0DCC7]'}
               onClick={() => handlePick('absent')}
             >
               Absent
             </Button>
             <Button
               size="sm"
-              variant={currentStatus === 'dayoff' ? 'primary' : 'outline'}
+              variant={currentStatus === 'dayoff' ? 'warn' : 'outline'}
+              className={currentStatus === 'dayoff' ? '' : 'border-gold/60 text-ink hover:bg-warn-bg'}
               onClick={() => handlePick('dayoff')}
             >
               Day Off
@@ -85,7 +88,7 @@ export default function AttendanceCard({ subject, time, record, holiday, onMark,
           {record?.status && (
             <div className="flex items-center justify-between">
               <Badge tone={STATUS_META[record.status].tone}>Marked: {STATUS_META[record.status].label}</Badge>
-              <button onClick={openNote} className="text-xs text-cobalt-500 font-medium hover:underline">
+              <button onClick={openNote} className="text-xs text-teal-deep font-semibold hover:underline">
                 {record.note ? 'Edit note' : '+ Add note'}
               </button>
             </div>
